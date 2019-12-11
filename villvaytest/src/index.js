@@ -7,13 +7,18 @@ import {
   Switch
 } from "react-router-dom";
 import { createStore, applyMiddleware } from "redux";
-import {Provider} from "react-redux"
+import { Provider } from "react-redux"
 import reduxThunk from "redux-thunk";
-import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import SiteIndex from "./components/site";
+import LandingIndex from "./components/landing";
+import LogIn from "./components/user/login";
+import SignUp from "./components/user/signup";
 import rootReducer from "./reduces";
+import App from './App';
+import './index.css';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css"
 
 
 export const store = createStore(rootReducer, applyMiddleware(reduxThunk));
@@ -22,9 +27,12 @@ ReactDOM.render(
 <Provider store={store}>
     <App >
         <Router onUpdate={() => console.log("updated")}>
-            <switch>
-                <Route exact path="/" component={SiteIndex} />
-            </switch>
+            <Switch>
+                <Route exact path="/" component={LandingIndex} />
+                <Route exact path="/home" component={SiteIndex} />
+                <Route exact path="/login" component={LogIn} />
+                <Route exact path="/signup" component={SignUp} />
+            </Switch>
         </Router>
     </App>
 </Provider>,
